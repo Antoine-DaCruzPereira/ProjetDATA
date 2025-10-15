@@ -1,5 +1,5 @@
 # ProjetDATA
-Projet de data E4 DSIA à l'ESIEE Paris
+Projet de data E4 DSIA Paris de Antoine & Soen à l'ESIEE
 
     $ git pull
     $ git add .
