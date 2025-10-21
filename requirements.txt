@@ -1,0 +1,5 @@
+requests>=2.31.0
+pandas>=2.1.0  # Version stable de septembre 2025
+dash>=2.14.0   # Framework pour le dashboard
+plotly>=5.17.0  # Visualisation de données interactives
+dash-bootstrap-components>=1.5.0  # Composants Bootstrap pour Dash
