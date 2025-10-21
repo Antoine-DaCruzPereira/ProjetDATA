@@ -10,45 +10,51 @@ def clean_velib_csv():
     cleandata_dir = os.path.join(project_root, "data", "cleandata")
     os.makedirs(cleandata_dir, exist_ok=True)
     cleandata_path = os.path.join(cleandata_dir, "velib_disponibilite_clean.csv")
+    
+    print(f"Fichier source : {rawdata_path}")
+    
+    # Suppression de l'ancien fichier clean s'il existe
+    if os.path.exists(cleandata_path):
+        os.remove(cleandata_path)
 
     # --- Lecture du fichier brut ---
-    print(f"Lecture du fichier brut : {rawdata_path}")
-    df = pd.read_csv(rawdata_path)
-    print(f"Nombre total de lignes dans le CSV brut : {len(df)}")
+    df = pd.read_csv(rawdata_path, sep=';', dtype={
+        'Identifiant station': str,
+        'Code INSEE communes équipées': str
+    })
+    # Remplacer les NaN par None pour station_opening_hours et autres colonnes optionnelles
+    optional_columns = ['station_opening_hours', 'Nom communes équipées', 'Code INSEE communes équipées']
+    for col in optional_columns:
+        df[col] = df[col].where(pd.notna(df[col]), None)
+        # Convertir explicitement les valeurs NaN en None
+        df[col] = df[col].astype(object).replace({pd.NA: None, pd.NaT: None, float('nan'): None})
 
     valid_rows = []
     invalid_count = 0
 
     # --- Validation et filtrage des lignes ---
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
         try:
             # Validation via Pydantic
             record = VelibStation(**row.to_dict())
             valid_rows.append(record.model_dump(by_alias=True))
-        except ValidationError:
+        except ValidationError as e:
+            print(f"Erreur de validation à la ligne {idx+1}:")
+            print(str(e))
             invalid_count += 1
-        except Exception:
+        except Exception as e:
+            print(f"Erreur inattendue à la ligne {idx+1}:")
+            print(str(e))
             invalid_count += 1
 
     # --- Sauvegarde dans le répertoire cleandata ---
-    print(f"Lignes valides conservées : {len(valid_rows)}")
-    print(f"Lignes invalides supprimées : {invalid_count}")
-
     if valid_rows:
         clean_df = pd.DataFrame(valid_rows)
         clean_df.to_csv(cleandata_path, index=False)
-        print(f"✅ Fichier nettoyé enregistré dans : {cleandata_path}")
+        print(f"Fichier nettoyé : {cleandata_path}")
+        print(f"Lignes traitées : {len(df)} → {len(valid_rows)} conservées")
     else:
-        print("⚠️ Aucune donnée valide trouvée, aucun fichier créé.")
-
-    # --- Récapitulatif final ---
-    print("\n=== Résumé du nettoyage ===")
-    print(f"Fichier source brut : {rawdata_path}")
-    print(f"Fichier nettoyé      : {cleandata_path}")
-    print(f"Lignes brutes        : {len(df)}")
-    print(f"Lignes valides       : {len(valid_rows)}")
-    print(f"Lignes supprimées    : {invalid_count}")
-    print("=============================\n")
+        print("Aucune donnée valide trouvée, aucun fichier créé.")
 
 if __name__ == "__main__":
     clean_velib_csv()

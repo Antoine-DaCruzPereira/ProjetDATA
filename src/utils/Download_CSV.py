@@ -11,6 +11,11 @@ def download_velib_csv():
 
     dest_path = os.path.join(rawdata_dir, "velib_disponibilite.csv")
 
+    # Suppression de l'ancien fichier s'il existe
+    if os.path.exists(dest_path):
+        os.remove(dest_path)
+        print(f"Suppression de l'ancien fichier : {dest_path}")
+
     print(f"Téléchargement du fichier depuis : {csv_url}")
     resp = requests.get(csv_url)
     resp.raise_for_status()
