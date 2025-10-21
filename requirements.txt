@@ -1,5 +1,5 @@
-requests>=2.31.0
-pandas>=2.1.0  # Version stable de septembre 2025
-dash>=2.14.0   # Framework pour le dashboard
-plotly>=5.17.0  # Visualisation de données interactives
-pydantic>=2.7.0  # Validation des données
+requests>=2.31.0    # Pour le téléchargement des données
+pandas>=2.1.0       # Pour la manipulation des données CSV
+dash>=2.14.0        # Framework pour le dashboard
+plotly>=5.17.0      # Visualisation de données interactives
+pydantic>=2.7.0     # Validation des données et modèles
