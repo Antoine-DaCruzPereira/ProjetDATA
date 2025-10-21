@@ -1,12 +1,19 @@
 # main.py
 from src.utils.Download_CSV import download_velib_csv
 from src.utils.CleanData_CSV import clean_velib_csv
+from src.utils.Create_DataBase import create_velib_database
 
 if __name__ == "__main__":
-    print("=== Téléchargement du CSV Vélib en cours... ===")
+    print("\n=== 1. Téléchargement du CSV Vélib ===")
+    print("--------------------------------------")
     download_velib_csv()
-    print("=== Téléchargement terminé ! ===")
 
-    print("=== Nettoyage et validation du CSV en cours... ===")
+    print("\n=== 2. Nettoyage et validation du CSV ===")
+    print("----------------------------------------")
     clean_velib_csv()
-    print("=== Données nettoyées et enregistrées avec succès ! ===")
+
+    print("\n=== 3. Création de la base de données ===")
+    print("----------------------------------------")
+    create_velib_database()
+
+    print("\n=== Pipeline de données terminé avec succès ! ===\n")

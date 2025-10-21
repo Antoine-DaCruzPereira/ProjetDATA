@@ -17,7 +17,6 @@ class VelibStation(BaseModel):
     coordonnees_geographiques: Tuple[float, float] = Field(..., alias="Coordonnées géographiques")
     commune: Optional[str] = Field(None, alias="Nom communes équipées")
     code_insee: Optional[str] = Field(None, alias="Code INSEE communes équipées")
-    horaires_ouverture: Optional[str] = Field(None, alias="station_opening_hours")
 
     # Convertir certains champs
     @field_validator("station_en_fonctionnement", "borne_paiement", "retour_possible", mode="before")

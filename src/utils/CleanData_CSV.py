@@ -16,14 +16,15 @@ def clean_velib_csv():
     # Suppression de l'ancien fichier clean s'il existe
     if os.path.exists(cleandata_path):
         os.remove(cleandata_path)
+        print(f"Ancien fichier nettoyé supprimé : {cleandata_path}")
 
     # --- Lecture du fichier brut ---
     df = pd.read_csv(rawdata_path, sep=';', dtype={
         'Identifiant station': str,
         'Code INSEE communes équipées': str
     })
-    # Remplacer les NaN par None pour station_opening_hours et autres colonnes optionnelles
-    optional_columns = ['station_opening_hours', 'Nom communes équipées', 'Code INSEE communes équipées']
+    # Remplacer les NaN par None pour les colonnes optionnelles
+    optional_columns = ['Nom communes équipées', 'Code INSEE communes équipées']
     for col in optional_columns:
         df[col] = df[col].where(pd.notna(df[col]), None)
         # Convertir explicitement les valeurs NaN en None
