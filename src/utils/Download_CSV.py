@@ -5,7 +5,7 @@ def download_velib_csv():
     csv_url = "https://www.data.gouv.fr/api/1/datasets/r/0845c838-6f18-40c3-936f-da204107759a"
 
     # Chemin absolu basé sur la racine du projet
-    project_root = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
     rawdata_dir = os.path.join(project_root, "data", "rawdata")
     os.makedirs(rawdata_dir, exist_ok=True)
 
