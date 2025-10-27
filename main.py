@@ -21,15 +21,6 @@ def init_data():
 
     print("\n=== Pipeline de données terminé avec succès ! ===\n")
 
-<<<<<<< HEAD
 if __name__ == "__main__":
     # Initialisation des données
     init_data()
-=======
-    print("\n=== Génération des histogrammes ===")
-    print("----------------------------------------")
-    create_histograms()
-
-    print("\n=== Génération des histogrammes terminée ! ===\n")
-    
->>>>>>> c117eaa9aed5bad1f7cf8673d29f93192d3c29e7
