@@ -14,8 +14,6 @@ db_path = os.path.join(os.path.dirname(__file__), "../../data/database/velib.db"
 conn = sqlite3.connect(db_path)
 
 #recupérer les coordonnées
-#df['latitude'] = df['Coordonnées géographiques'].apply(lambda x: float(x.split(',')[0].replace('(','')))
-#df['longitude'] = df['Coordonnées géographiques'].apply(lambda x: float(x.split(',')[1].replace(')','')))
 query = """
 SELECT 
     s.identifiant_station,
@@ -43,6 +41,8 @@ m=folium.Map(location=[48.8566, 2.3522], zoom_start=12,tiles='OpenStreetMap')
 colormap = cm.LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=100, caption='Taux d\'occupation (%)')
 colormap.add_to(m)
 
+df_clean = df.dropna(subset=['taux_occupation'])
+
 #Ajouter les sations sur la carte 
 #for _,row in df.iterrows():
 #    popup_text = f"Station: {row['Nom de la station']}<br>Taux d'occupation: {row['taux_occupation']:.2f}%"
@@ -55,25 +55,48 @@ colormap.add_to(m)
 #        popup=folium.Popup(popup_text, max_width=300)
  #   ).add_to(m)
 
+#for _, row in df.iterrows():
+#    popup_html = f"""
+#    <b>{row['nom_station']}</b><br>
+#    Capacité : {row['capacite_station']} bornettes<br>
+#    Vélos dispo : {row['velos_disponibles']}<br>
+#    Taux d’occupation : {row['taux_occupation']:.1f} %
+#    """
+#    folium.CircleMarker(
+#        location=[row["latitude"], row["longitude"]],
+#        radius=1,
+#        color="red",
+#        fill=True,
+#        fill_opacity=0.7,
+#        popup=folium.Popup(
+#            f"<b>{row['nom_station']}</b><br>Capacité : {row['capacite_station']} bornettes",
+#            max_width=250
+#        )
+ #   ).add_to(m)
+
+#Ajouter les sations sur la carte, en utilisant le taux d'occupation pour la couleur
 for _, row in df.iterrows():
+    # Le HTML de la popup contient toutes les informations
     popup_html = f"""
     <b>{row['nom_station']}</b><br>
     Capacité : {row['capacite_station']} bornettes<br>
     Vélos dispo : {row['velos_disponibles']}<br>
-    Taux d’occupation : {row['taux_occupation']:.1f} %
+    **Taux d’occupation : {row['taux_occupation']:.1f} %**
     """
+    
+    # Utilisez folium.Popup pour que le HTML soit interprété
+    popup = folium.Popup(popup_html, max_width=250)
+    
     folium.CircleMarker(
         location=[row["latitude"], row["longitude"]],
-        radius=1,
-        color="red",
+        radius=6, # Augmenté pour être visible et cliquable
+        color=colormap(row['taux_occupation']), # Applique la couleur selon le taux d'occupation
         fill=True,
-        fill_opacity=0.7,
-        popup=folium.Popup(
-            f"<b>{row['nom_station']}</b><br>Capacité : {row['capacite_station']} bornettes",
-            max_width=250
-        )
+        fill_opacity=0.8,
+        popup=popup # Ajout de la popup interactive
     ).add_to(m)
 
+# Enregistrer la carte (le reste de votre code est correct)
 
 #Enregister la carte 
 output_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../images/maps/velib_occupation_map.html"))
