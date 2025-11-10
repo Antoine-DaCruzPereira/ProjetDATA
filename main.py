@@ -14,6 +14,7 @@ from src.utils.Download_CSV import download_velib_csv
 from src.utils.CleanData_CSV import clean_velib_csv
 from src.utils.Create_DataBase import create_velib_database
 from src.utils.Histogramme import create_histograms 
+from src.utils.Map import Map_Int
 
 def init_data():
     """Initialise les données nécessaires au dashboard"""
@@ -29,10 +30,18 @@ def init_data():
     print("----------------------------------------")
     create_velib_database()
 
+    print("\n=== 4. Création des histogrammes ===")
+    print("----------------------------------------")
+    create_histograms()
+
+    print("\n=== 5. Création de la Map ===")
+    print("----------------------------------------")
+    Map_Int()
+
     print("\n=== Pipeline de données terminé avec succès ! ===\n")
 
 app = Dash(__name__, use_pages=False)
-app.title = "Paris_vlib_Dashboard"
+app.title = "Paris_velib_Dashboard"
 
 # Layout principal avec navigation
 app.layout = html.Div([

@@ -24,7 +24,7 @@ def get_db_connection():
         print(f"Vérifiez le chemin : {DB_PATH}")
         return None
 
-def create_and_save_folium_map():
+def Map_Int():
     """Crée une carte Folium interactive des stations Vélib' et l'enregistre en HTML."""
     
     conn = get_db_connection()
@@ -107,4 +107,4 @@ def create_and_save_folium_map():
 
 # Appel de la fonction pour exécuter la création de la carte
 if __name__ == '__main__':
-    create_and_save_folium_map()
+    Map_Int()
