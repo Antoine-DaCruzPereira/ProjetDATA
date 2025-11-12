@@ -4,5 +4,4 @@ dash>=3.2.0        # Framework pour le dashboard
 plotly>=5.17.0      # Visualisation de données interactives
 pydantic>=2.7.0     # Validation des données et modèles
 folium>=0.20.0      # Pour la création de cartes interactives
-sqlite3>=2.6.0      # Pour la gestion de la base de données SQLite
 branca>=0.8.2    # Dépendance de Folium pour les cartes interactives
