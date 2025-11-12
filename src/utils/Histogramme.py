@@ -4,38 +4,8 @@ from typing import Optional
 import pandas as pd
 import plotly.express as px
 
-OUTPUT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                           "../../assets"))
 
 
-def supprimer_existing_histo(directory_path: str) -> None:
-    """Supprime les fichiers HTML d'histrogrammes existants dans le répertoire spécifié."""
-
-    # Utiliser le paramètre 'directory_path' au lieu d'une variable globale 'OUTPUT_PATH'
-    print(f"Nettoyage du répertoire : {directory_path}...") 
-    
-    # Vérification si c'est un répertoire (meilleure pratique)
-    if not os.path.isdir(directory_path):
-        print(f"Erreur : Le chemin n'est pas un répertoire : {directory_path}")
-        return
-
-    # 1. Parcourir tous les éléments dans le répertoire
-    for item_name in os.listdir(directory_path):
-        # Créer le chemin complet de l'élément (fichier ou dossier)
-        full_path = os.path.join(directory_path, item_name)
-        
-        # 2. Vérifier si c'est un fichier ET s'il se termine par .html
-        if os.path.isfile(full_path) and item_name.endswith('.html'):
-            try:
-                os.remove(full_path)
-                print(f" Supprimé : {item_name}")
-            except OSError as e:
-                print(f"Erreur lors de la suppression de {item_name} : {e}")
-
-    print("Nettoyage terminé.")
-
-if OUTPUT_PATH is not None:
-    supprimer_existing_histo(OUTPUT_PATH)
     
 def create_histograms(output_dir: Optional[str] = None) -> None:
     """
