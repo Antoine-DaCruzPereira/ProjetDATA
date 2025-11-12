@@ -3,16 +3,15 @@ import folium
 import pandas as pd
 import branca.colormap as cm
 import sqlite3
-import json
-#BABABABABABABA
+
+
 DB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
                                        "..", 
                                        "..", 
                                        "data", "database", "velib.db"))
 
 
-OUTPUT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
-                                           "../../assets/velib_occupation_map.html"))
+
 
 def get_db_connection():
     """Fonction utilitaire pour établir la connexion SQLite."""
@@ -32,12 +31,17 @@ def delete_existing_map(path):
     else:
         print("Aucune ancienne carte trouvée à supprimer.")
 
-if OUTPUT_PATH is not None:
-    delete_existing_map(OUTPUT_PATH)
+
 
 def Map_Int():
     """Crée une carte Folium interactive des stations Vélib' et l'enregistre en HTML."""
+
+   # OUTPUT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
+     #                                      "../../assets/velib_occupation_map.html"))
     
+    #if OUTPUT_PATH is not None:
+    # delete_existing_map(OUTPUT_PATH)
+
     conn = get_db_connection()
     if conn is None:
          print("Création de carte annulée : Connexion à la base de données impossible.")

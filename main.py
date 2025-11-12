@@ -1,20 +1,21 @@
 # main.py
 from dash import Dash, html, dcc, Input, Output
 import dash
-from src.pages import carte_position, home
-from src.pages import velos_disponibles
-from src.pages import velos_electriques
-from src.pages import velos_mecaniques
-from src.pages import capacite_station
-from src.pages import taux_occupation_moyen
-from src.pages import station_non_fonctionnelles
-from src.pages import capacite_vs_velos_disponibles
-from src.components.navbar import create_navbar
+
 from src.utils.Download_CSV import download_velib_csv
 from src.utils.CleanData_CSV import clean_velib_csv
 from src.utils.Create_DataBase import create_velib_database
 from src.utils.Histogramme import create_histograms 
 from src.utils.Map import Map_Int
+#from src.pages import carte_position, home
+#from src.pages import velos_disponibles
+#from src.pages import velos_electriques
+#from src.pages import velos_mecaniques
+#from src.pages import capacite_station
+#from src.pages import taux_occupation_moyen
+#from src.pages import station_non_fonctionnelles
+#from src.pages import capacite_vs_velos_disponibles
+#from src.components.navbar import create_navbar
 
 def init_data():
     """Initialise les données nécessaires au dashboard"""
@@ -39,7 +40,7 @@ def init_data():
     Map_Int()
 
     print("\n=== Pipeline de données terminé avec succès ! ===\n")
-
+""""
 app = Dash(__name__, use_pages=False)
 app.title = "Paris_velib_Dashboard"
 
@@ -86,8 +87,8 @@ def display_page(pathname):
         return capacite_vs_velos_disponibles.layout
     else:
         return html.Div([html.H1("Page non trouvée")])
-
+"""
 if __name__ == "__main__":
     # Initialisation des données
     init_data()
-    app.run(debug=True)
+    #app.run(debug=True)
