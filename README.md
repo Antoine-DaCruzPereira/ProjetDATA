@@ -82,10 +82,43 @@ Le projet suit la structure suivante :
         ├──Download_CSV.py
         ├──Histogramme.py
         ├──Map.py
-        ├──velib_station.py
+        ├──velib_s.py
 ├── .gitignore
 ├── config.py
 ├── main.py
 ├── README.md
 └── requirements.txt
 </pre>
+---
+
+## ⚙️ Utilisation
+
+
+1.  **Lancer le Dashboard :**
+    ```bash
+    python main.py
+    ```
+    Ouvrez votre navigateur et accédez à l'adresse fournie par Dash (généralement `http://127.0.0.1:8050/`).
+
+---
+
+## 🔗 Liens Utiles
+
+* **Source des Données :** https://www.data.gouv.fr/datasets/velib-velos-et-bornes-disponibilite-temps-reel/
+* **Documentation Dash :** https://dash.plotly.com/
+* **Documentation Folium :** https://python-visualization.github.io/folium/latest/
+
+
+---
+
+## ✅ Conclusions et Perspectives
+
+
+---
+
+## © Copyright
+
+Je déclare sur l'honneur que le code fourni a été produit par moi/nous-même, à l'exception des lignes ci-dessous :
+
+* **Pour chaque ligne (ou groupe de lignes) empruntée**, donner la référence de la source et une explication de la syntaxe utilisée.
+* Toute ligne non déclarée ci-dessus est réputée être produite par l'auteur (ou les auteurs) du projet. L'absence ou l'omission de déclaration sera considérée comme du **plagiat**.

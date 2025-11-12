@@ -50,7 +50,7 @@ def clean_velib_csv():
         os.remove(cleandata_path)
         print(f"Ancien fichier nettoyé supprimé : {cleandata_path}")
 
-    # --- Lecture du fichier brut ---
+    # --- Lecture du fichier  ---
     df = pd.read_csv(rawdata_path, sep=';', dtype={
         'Identifiant station': str,
         'Code INSEE communes équipées': str
@@ -71,7 +71,7 @@ def clean_velib_csv():
     # --- Validation et filtrage des lignes ---
     for idx, row in df.iterrows():
         try:
-            # Validation via Pydantic
+            # Validation avec Pydantic
             record = VelibStation(**row.to_dict())
             valid_rows.append(record.model_dump(by_alias=True))
         except ValidationError as e:
