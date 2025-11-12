@@ -3,6 +3,7 @@ import folium
 import pandas as pd
 import branca.colormap as cm
 import sqlite3
+import json
 
 # Chemin d'accès à la base de données (gardé pour la connexion)
 # NOTE: Le chemin relatif nécessite que le script soit exécuté dans un contexte spécifique
@@ -10,9 +11,18 @@ import sqlite3
 # Pour simplifier, nous utilisons le chemin tel qu'il est défini dans le code original
 # mais il peut nécessiter des ajustements en fonction de l'environnement d'exécution.
 DB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
-                                       "..", # Remonte à src
-                                       "..", # Remonte à ProjetDATA
+                                       "..", 
+                                       "..", 
                                        "data", "database", "velib.db"))
+
+GEOJSON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
+                                            "..", 
+                                            "..", 
+                                            "data", 
+                                            "arrondissements.geojson"))
+
+OUTPUT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 
+                                           "../../assets/velib_occupation_map.html"))
 
 def get_db_connection():
     """Fonction utilitaire pour établir la connexion SQLite."""
@@ -23,6 +33,34 @@ def get_db_connection():
         print(f"Erreur CRITIQUE de connexion à la base de données : {e}")
         print(f"Vérifiez le chemin : {DB_PATH}")
         return None
+    
+
+def load_geojson_data(path):
+    """Charge les données GeoJSON à partir du chemin spécifié."""
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    except FileNotFoundError:
+        print(f"Erreur: Le fichier GeoJSON n'a pas été trouvé à l'emplacement : {path}")
+        return None
+    except json.JSONDecodeError as e:
+        print(f"Erreur de décodage JSON dans le fichier GeoJSON : {e}")
+        return None
+
+# Charger les données GeoJSON avant d'appeler create_and_save_folium_map
+ARRONDISSEMENTS_GEOJSON = load_geojson_data(GEOJSON_PATH)
+
+def delete_existing_map(path):
+    """Supprime le fichier HTML de la carte existante s'il existe."""
+    if os.path.exists(path):
+        os.remove(path)
+        print(f"Carte existante supprimée : {path}")
+    else:
+        print("Aucune ancienne carte trouvée à supprimer.")
+
+if OUTPUT_PATH is not None:
+    delete_existing_map(OUTPUT_PATH)
 
 def Map_Int():
     """Crée une carte Folium interactive des stations Vélib' et l'enregistre en HTML."""
@@ -31,6 +69,8 @@ def Map_Int():
     if conn is None:
          print("Création de carte annulée : Connexion à la base de données impossible.")
          return
+
+    
 
     # Requête pour récupérer les données de station avec la dernière disponibilité
     query = """
@@ -65,10 +105,29 @@ def Map_Int():
 
     # Création de la carte Folium centrée sur Paris
     m = folium.Map(location=[48.8566, 2.3522], zoom_start=12, tiles='OpenStreetMap')
+    m.fit_bounds([[48.7, 2.0], [49.0, 2.7]])
 
     # Définition de la colormap (Vert=Disponible, Rouge=Occupé)
     colormap = cm.LinearColormap(colors=['green', 'yellow', 'red'], vmin=0, vmax=100, caption='Taux d\'occupation (%)')
     colormap.add_to(m)
+
+    if ARRONDISSEMENTS_GEOJSON is None:
+        print("Carte créée sans limites d'arrondissements car le GeoJSON n'a pas été chargé.")
+        m = folium.Map(location=[48.8566, 2.3522], zoom_start=12, tiles='OpenStreetMap')
+        # ... (Le reste du code saute l'étape fit_bounds basé sur GeoJSON)
+    else:
+        m = folium.Map(location=[48.8566, 2.3522], zoom_start=12, tiles='OpenStreetMap')
+
+        geojson_layer = folium.GeoJson(
+            ARRONDISSEMENTS_GEOJSON,
+            name='Arrondissements de Paris',
+            style_function=lambda x: {
+                'fillColor': '#00000000',
+                'color': 'black',
+                'weight': 1,
+                'fillOpacity': 0.1
+            }
+        ).add_to(m)
 
     # Ajout des marqueurs circulaires
     for _, row in df_map.iterrows():
