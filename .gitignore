@@ -1,0 +1,76 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# === Virtual Environment ===
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS Files ===
+.DS_Store
+Thumbs.db
+
+# === Project Data & Assets ===
+data/
+assets/
+*.csv
+*.xlsx
+*.db
+*.sqlite
+*.sqlite3
+*.pkl
+*.json
+
+# === Cache / Temporary Files ===
+.cache/
+__pycache__/
+*.tmp
+*.bak
+*.out
+
+# === Logs ===
+logs/
+*.log
+
+# === Dash / Streamlit / Plotly / Flask ===
+.streamlit/
+*.map
+instance/
+*.pyc
+
+# === Build / Distribution ===
+build/
+dist/
+*.spec
+
+# === Node / Frontend (if any) ===
+node_modules/
+
+# === Reports, Notebooks & Exports ===
+*.ipynb_checkpoints/
+*.html
+*.pdf
+
+# === Generated Figures or Temp Exports ===
+src/assets/generated_figures/
+src/assets/tmp/
+
+# === Sensitive Files ===
+config
