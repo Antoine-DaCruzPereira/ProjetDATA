@@ -101,6 +101,8 @@ Le projet suit la structure suivante :
     Ouvrez votre navigateur et accédez à l'adresse fournie par Dash (généralement `http://127.0.0.1:8050/`).
 
 ---
+**Page d'acceuil du Dashboard**
+![Dashboard Acceuil](images/Dashboard_Acceuil.png "Dashboard")
 
 ## 🔗 Liens Utiles
 
