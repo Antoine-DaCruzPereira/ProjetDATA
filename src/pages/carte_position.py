@@ -1,14 +1,14 @@
 from dash import html
 from src.components.footer import create_footer
+from src.utils.load_html import load_html_asset
 
 layout = html.Div([
     html.H1("Carte de Position des Vélib en Région parisienne", style={"textAlign": "center"}),
     
     html.Div([
-        html.Iframe(
-            srcDoc=open("./assets/velib_occupation_map.html", "r").read(),
-            style={"width": "100%", "height": "600px", "border": "none"}
-        )
+        
+        load_html_asset("velib_occupation_map.html", height="600px"),
+       
     ], style={"padding": "20px"}),
 
     create_footer()
