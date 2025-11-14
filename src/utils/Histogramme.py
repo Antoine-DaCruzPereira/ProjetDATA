@@ -83,6 +83,7 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
             "title": "Distribution des capacités des stations",
             "file": "hist_capacite_station.html",
             "x_title": "Capacité de la station (nombre de bornettes)",
+            "y_title": "Nombre de stations",
         },
         {
             "df": disponibilites_df,
@@ -90,6 +91,7 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
             "title": "Distribution du total de vélos disponibles",
             "file": "hist_velos_disponibles.html",
             "x_title": "Nombre de vélos disponibles",
+            "y_title": "Nombre de velo dans une station",
         },
         {
             "df": disponibilites_df,
@@ -97,6 +99,7 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
             "title": "Distribution des vélos électriques disponibles",
             "file": "hist_velos_electriques.html",
             "x_title": "Nombre de vélos électriques disponibles",
+            "y_title": "Nombre de velo dans une station",
         },
         {
             "df": disponibilites_df,
@@ -104,6 +107,7 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
             "title": "Distribution des vélos mécaniques disponibles",
             "file": "hist_velos_mecaniques.html",
             "x_title": "Nombre de vélos mécaniques disponibles",
+            "y_title": "Nombre de velo dans une station",
         },
     ]
 
@@ -124,7 +128,7 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
         fig.update_layout(
             bargap=0.05,
             xaxis_title=spec["x_title"],
-            yaxis_title="Nombre d'observations",
+            yaxis_title=spec["y_title"],
         )
         target_path = os.path.join(output_dir, spec["file"])
         fig.write_html(target_path, include_plotlyjs="cdn")
