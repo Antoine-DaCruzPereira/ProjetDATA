@@ -2,6 +2,7 @@ import os
 import pandas as pd
 from pydantic import ValidationError
 from src.utils.velib_station import VelibStation
+from config import rawdata_path, cleandata_path
 
 def remove_empty_columns(df):
     """
@@ -36,12 +37,6 @@ def remove_empty_columns(df):
     return df, []
 
 def clean_velib_csv():
-    # --- Définition des chemins ---
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-    rawdata_path = os.path.join(project_root, "data", "rawdata", "velib_disponibilite.csv")
-    cleandata_dir = os.path.join(project_root, "data", "cleandata")
-    os.makedirs(cleandata_dir, exist_ok=True)
-    cleandata_path = os.path.join(cleandata_dir, "velib_disponibilite_clean.csv")
     
     print(f"Fichier source : {rawdata_path}")
     

@@ -2,14 +2,9 @@ import os
 import pandas as pd
 import sqlite3
 from datetime import datetime
+from config import cleandata_path, db_path
 
 def create_velib_database():
-    # --- Définition des chemins ---
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-    cleandata_path = os.path.join(project_root, "data", "cleandata", "velib_disponibilite_clean.csv")
-    db_dir = os.path.join(project_root, "data", "database")
-    os.makedirs(db_dir, exist_ok=True)
-    db_path = os.path.join(db_dir, "velib.db")
 
     # Suppression de l'ancienne base de données si elle existe
     if os.path.exists(db_path):

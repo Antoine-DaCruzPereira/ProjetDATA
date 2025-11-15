@@ -3,6 +3,7 @@ import sqlite3
 from typing import Optional
 import pandas as pd
 import plotly.express as px
+from config import project_root, db_path
 
 
 
@@ -16,8 +17,6 @@ def create_histograms(output_dir: Optional[str] = None) -> None:
         output_dir: Dossier cible pour les fichiers HTML. S'il est omis, les
             histogrammes sont stockés dans ``images/histograms`` à la racine.
     """
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-    db_path = os.path.join(project_root, "data", "database", "velib.db")
 
     if not os.path.exists(db_path):
         raise FileNotFoundError(

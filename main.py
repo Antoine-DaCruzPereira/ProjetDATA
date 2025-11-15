@@ -2,7 +2,10 @@
 from dash import Dash, html, dcc, Input, Output
 import dash
 
-from src.utils.Download_CSV import download_velib_csv
+from config import chemin_home,chemin_carte_position,chemin_velos_disponibles,chemin_velos_electriques,chemin_velos_mecaniques,chemin_capacite_station,chemin_taux_occupation_moyen,chemin_station_non_fonctionnelles,chemin_capacite_vs_disponibles
+
+
+from src.utils.get_data import download_velib_csv
 from src.utils.CleanData_CSV import clean_velib_csv
 from src.utils.Create_DataBase import create_velib_database
 from src.utils.Histogramme import create_histograms 
@@ -67,23 +70,23 @@ def update_navbar(pathname):
     Input("url", "pathname")
 )
 def display_page(pathname):
-    if pathname == "/":
+    if pathname == chemin_home:
         return home.layout
-    elif pathname == "/carte-positions":
+    elif pathname == chemin_carte_position:
         return carte_position.layout
-    elif pathname == "/velos-disponibles":
+    elif pathname == chemin_velos_disponibles:
         return velos_disponibles.layout
-    elif pathname == "/velos-electriques":
+    elif pathname == chemin_velos_electriques:
         return velos_electriques.layout
-    elif pathname == "/velos-mecaniques":
+    elif pathname == chemin_velos_mecaniques:
         return velos_mecaniques.layout
-    elif pathname == "/capacite-station":
+    elif pathname == chemin_capacite_station:
         return capacite_station.layout
-    elif pathname == "/taux-occupation":
+    elif pathname == chemin_taux_occupation_moyen:
         return taux_occupation_moyen.layout
-    elif pathname == "/stations-non-fonctionnelles":
+    elif pathname == chemin_station_non_fonctionnelles:
         return station_non_fonctionnelles.layout
-    elif pathname == "/capacite-vs-disponibles":
+    elif pathname == chemin_capacite_vs_disponibles:
         return capacite_vs_velos_disponibles.layout
     else:
         return html.Div([html.H1("Page non trouvée")])
