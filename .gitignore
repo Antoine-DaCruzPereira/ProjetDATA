@@ -1,9 +1,6 @@
-# === Python ===
+# === PYTHON ===
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-*.pdb
 *.egg-info/
 *.egg
 *.log
@@ -27,50 +24,59 @@ venv.bak/
 .DS_Store
 Thumbs.db
 
-# === Project Data & Assets ===
-data/
-assets/
-*.csv
-*.xlsx
-*.db
-*.sqlite
-*.sqlite3
-*.pkl
-*.json
+# === Project Configuration (sensitive) ===
+config.py
 
-# === Cache / Temporary Files ===
+# === Data ===
+# Raw data NEVER committed
+data/rawdata/
+
+# Cleaned data may be versioned — remove this line if needed
+data/cleandata/*.csv
+
+# Database is not committed
+data/database/*.db
+
+# If you generate temporary exports:
+data/tmp/
+
+# === Assets ===
+# Static assets kept, but generated graphs ignored
+assets/generated/
+assets/exports/
+
+# Ignore large/generated HTML visualizations but keep manual ones
+assets/*.html
+
+# === Logs & Cache ===
+logs/
 .cache/
-__pycache__/
 *.tmp
 *.bak
 *.out
 
-# === Logs ===
-logs/
-*.log
-
-# === Dash / Streamlit / Plotly / Flask ===
+# === Streamlit / Dash / Plotly / Flask ===
 .streamlit/
-*.map
 instance/
-*.pyc
+*.map
 
 # === Build / Distribution ===
 build/
 dist/
 *.spec
 
-# === Node / Frontend (if any) ===
+# === Node / Frontend (optional) ===
 node_modules/
 
-# === Reports, Notebooks & Exports ===
-*.ipynb_checkpoints/
-*.html
-*.pdf
+# === Jupyter Notebooks ===
+*/.ipynb_checkpoints/
+.ipynb_checkpoints/
 
-# === Generated Figures or Temp Exports ===
+# === Reports, Exports ===
+*.pdf
+*.md~
+*.html~
+
+# === Figures or Temporary Outputs ===
 src/assets/generated_figures/
 src/assets/tmp/
-
-# === Sensitive Files ===
-config
