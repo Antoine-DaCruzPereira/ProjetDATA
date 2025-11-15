@@ -4,7 +4,7 @@ from config import chemin_home,chemin_carte_position,chemin_velos_disponibles,ch
 
 
 layout = html.Div([
-    html.H1("Dashboard sur les vélib en Région parisienne", style={"textAlign": "center", "margin-bottom": "40px"}),
+    html.H1("Dashboard d'étude des vélib en Région parisienne", style={"textAlign": "center", "margin-bottom": "40px"}),
 
     html.Div([
         html.A(
