@@ -4,7 +4,7 @@ Projet de data E4 DSIA Paris de Antoine & Soen à l'ESIEE
 
 ## 📝 Description
 
-Ce projet a pour objectif de visualiser et analyser l'état des stations Vélib' à Paris.Il utilise des données mises à jour régulièrement, stockées dans une base de données SQLite crée par nous , pour ensuite  générer des graphes et cartes interactives  et des des disponibilités.
+Ce projet a pour objectif de visualiser et analyser l'état des stations Vélib' à Paris.Il utilise des données mises à jour régulièrement, stockées dans une base de données SQLite crée par nous , pour ensuite  générer des graphes et cartes interactives et des des disponibilités qui est mis a jour toutes les heures.
 
 ---
 
@@ -104,6 +104,16 @@ Le projet suit la structure suivante :
 **Page d'acceuil du Dashboard**
 ![Dashboard Acceuil](images/Dashboard_Acceuil.png "Dashboard")
 
+Voici la page d'acceuil de notre Dashboard ou l'on à accès au differents diagramme et de la carte.
+
+**Exemple de Graphique**
+![Taux d'occupation](images/Graphique_taux_occupation.png "Graphique")
+
+**Exemple de conclusion sur le graphique**
+
+On voit que le taux d'occupation varie beaucoup selon les stations. Peu de stations sont totalement pleines ce qui nous demontre l'influence des vélib dans Paris. 
+_L'histogramme est interactif est permet d'etre plus précis sur les valeurs._
+
 ## 🔗 Liens Utiles
 
 * **Source des Données :** https://www.data.gouv.fr/datasets/velib-velos-et-bornes-disponibilite-temps-reel/
@@ -114,7 +124,18 @@ Le projet suit la structure suivante :
 ---
 
 ## ✅ Conclusions et Perspectives
+Le réseau Vélib’ est trés utilisé, avec une disponibilité de vélos souvent faible.
 
+Il existe de grosses différences selon les zones :
+Dans les Arrondisments, les stations sont souvent vides.
+Dans la périphérie , il y a plus de disponibilités.
+
+Les vélos électriques sont encore moins disponibles que les mécaniques due à le forte demande.
+
+Les stations sont de petite capacité, ce qui augmente le risque de saturation des stations.
+
+La plupart des stations fonctionnent , donc les problèmes ne proviennent pas d’un manque de stations qui fonctionnent , mais plutôt :
+de la dégradation des vélos,de la demande élevée,de la petite taille moyenne des stations.
 
 ---
 

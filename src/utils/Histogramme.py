@@ -10,12 +10,11 @@ from config import project_root, db_path
     
 def create_histograms(output_dir: Optional[str] = None) -> None:
     """
-    Génère quelques histogrammes descriptifs à partir des données de la base SQLite
-    et enregistre les graphiques au format HTML interactif.
+    Génère les histogrammes  à partir des données de la base SQLite
+    et enregistre les graphiques au format HTML .
 
     Args:
-        output_dir: Dossier cible pour les fichiers HTML. S'il est omis, les
-            histogrammes sont stockés dans ``images/histograms`` à la racine.
+        output_dir: Dossier pour les fichiers HTML. 
     """
 
     if not os.path.exists(db_path):
